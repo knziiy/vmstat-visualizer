@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VMStat Visualization</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <h3>vmstat Visualizer</h3>
+      <p class="text-secondary fs-6">
+        Please drag and drop the results of vmstat, or click on the graph to
+        specify a file.<br />
+        Please provide the results outputted by running `vmstat 1 -t | tee
+        vmstat.log`
+      </p>
+      <div class="row">
+        <div class="col-12 my-4 text-center">
+          <h3>CPU Usage</h3>
+          <input type="file" id="fileInput" style="display: none" />
+          <canvas id="cpuChartCanvas" width="400" height="150"></canvas>
+        </div>
+        <div class="col-12 my-4 text-center">
+          <h3>Memory Usage</h3>
+          <canvas id="memoryChartCanvas" width="400" height="150"></canvas>
+        </div>
+        <div class="col-12 my-4 text-center">
+          <h3>Swap Usage</h3>
+          <canvas id="swapChartCanvas" width="400" height="150"></canvas>
+        </div>
+        <div class="col-12 my-4 text-center">
+          <h3>IO Usage</h3>
+          <canvas id="ioChartCanvas" width="400" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
