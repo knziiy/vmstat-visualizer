@@ -21,6 +21,8 @@ You can use from here.
 
 https://knziiy.net/vmstat-visualizer/
 
+## Author & License
 
-
-
+* knziiy
+* License:  
+  MIT (see LICENSE)
