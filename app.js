@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  
+
   fileInput.addEventListener("change", async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -235,13 +235,16 @@ document.addEventListener("DOMContentLoaded", () => {
     memoryChart.data.datasets.forEach((dataset) => (dataset.data = []));
     swapChart.data.labels = [];
     swapChart.data.datasets.forEach((dataset) => (dataset.data = []));
-
+    let i = 0;
     lines.forEach((line) => {
       if (!line.trim() || line.startsWith("procs ") || line.startsWith(" r  b"))
         return; // Ignore empty lines and header lines
       let line_mod = " " + line;
       const parts = line_mod.split(/\s+/);
-      const timestamp = parts[19];
+      let timestamp = parts[19];
+      if (!timestamp){
+        timestamp = i++;
+      }
 
       cpuChart.data.labels.push(timestamp);
       ioChart.data.labels.push(timestamp);
@@ -268,5 +271,54 @@ document.addEventListener("DOMContentLoaded", () => {
     ioChart.update();
   }
 
+  function downloadCanvasAsPng(canvas, filename) {
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+  
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+  
+    // Draw a white background
+    tempCtx.fillStyle = "white";
+    tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+  
+    // Draw the original canvas onto the temporary one
+    tempCtx.drawImage(canvas, 0, 0);
+  
+    // Create the download link
+    const link = document.createElement("a");
+    link.href = tempCanvas.toDataURL("image/png");
+    link.download = filename;
+    link.click();
+  }
+  
+  
+  const downloadButtons = document.querySelectorAll(".download-btn");
+  
+  downloadButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      let canvas;
+      let filename;
+      switch (index) {
+        case 0:
+          canvas = cpuChartCanvas;
+          filename = "cpu-usage.png";
+          break;
+        case 1:
+          canvas = memoryChartCanvas;
+          filename = "memory-usage.png";
+          break;
+        case 2:
+          canvas = swapChartCanvas;
+          filename = "swap-usage.png";
+          break;
+        case 3:
+          canvas = ioChartCanvas;
+          filename = "io-usage.png";
+          break;
+      }
+      downloadCanvasAsPng(canvas, filename);
+    });
+  });
 
 });
