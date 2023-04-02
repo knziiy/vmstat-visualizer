@@ -7,7 +7,9 @@
 vmstat Visualizer visualizes the results of vmstat in a graph format. 
 
 ##  Features
-Automatically generate a graph by dragging and dropping the results of vmstat 1.  
+Automatically generate a graph by dragging and dropping the results of `vmstat 1`.  
+Please provide the results outputted by running `vmstat 1 -t | tee vmstat.log`
+        
 You can also download the graph in PNG.
 <div align="center">
   <img src="static/vmstat-visualizer-image.gif">
