@@ -17,6 +17,8 @@ You can also download the graph in PNG.
 
 You can use from here.
 
+https://knziiy.net/vmstat-visualizer/
+
 
 
 
